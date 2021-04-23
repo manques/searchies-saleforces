@@ -1,0 +1,18 @@
+<template>
+    <lightning-card>
+        <p>{detail.name}</p>
+        <p>{detail.vin}</p>
+        <template for:each={list} for:item="yyyy">
+            <c-card item={yyyy}
+                    key={yyyy.id}>
+            </c-card>
+        </template>
+    </lightning-card>
+    <div style="height: 300px;">
+        <lightning-datatable
+                key-field="id"
+                data={data}
+                columns={columns}>
+        </lightning-datatable>
+    </div> 
+</template>
