@@ -1,0 +1,38 @@
+.c-container {
+    border: 1px solid #d8dde6;
+    margin: 10px 0 20px 0;
+}
+.page-section {
+    border: solid 1px #ccc;
+    padding: 1rem;
+}
+.page-header,
+.page-footer {
+    height: 50px;
+}
+.page-main {
+    background: #f8f8f8;
+}
+.page-left,
+.page-right {
+    background: #f0efef;
+}
+
+
+
+
+
+/* .container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+    
+}
+
+.cardTable {
+    width: 50%;
+    padding: 1rem;
+    min-width: 400px;
+} */

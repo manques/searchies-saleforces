@@ -2,7 +2,7 @@
     <lightning-card>
        <div class="container">
             <!-- name -->
-            <div class="name">
+            <div class="nameContainer">
                 <lightning-input type="text" 
                             label="Name" 
                             name="name"
@@ -10,10 +10,10 @@
                             onchange={handleChange} 
                             required>
                 </lightning-input>
-                <p>{name}</p>
+                <!-- <p>{name}</p> -->
             </div>
             <!-- vin -->
-            <div class="vin">
+            <div class="vinContainer">
                 <lightning-input type="text" 
                     label="VIN" 
                     name="vin"
@@ -21,14 +21,15 @@
                     onchange={handleChange} 
                     required>
                 </lightning-input>
-                <p>{vin}</p>
+                <!-- <p>{vin}</p> -->
             </div>
             <!-- button -->
-            <div class="button">
+            <div class="buttonContainer">
                 <lightning-button variant="brand" 
                     label="Search" 
                     title="Search action" 
-                    onclick={handleClick}>
+                    onclick={handleClick}
+                    class="button">
                 </lightning-button>
             </div>
        </div>

@@ -6,11 +6,15 @@
     flex-wrap: wrap;
 }
 
-.name, .vin, .button {
+.nameContainer, .vinContainer, .buttonContainer {
     width: 33%;
     padding: 10px;
 }
 
-.button{
+.buttonContainer{
     margin-top: 26px;
+}
+
+.button button{
+    width: 100% !important;
 }
