@@ -1,10 +1,11 @@
-import { LightningElement } from 'lwc';
+import { LightningElement, track } from 'lwc';
 
 export default class InputsContainer extends LightningElement {
-    name = '';
-    vin = '';
+    @track name = '';
+    @track vin = '';
 
     handleChange(event){
+        console.log(event);
         const field = event.target.name;
         const value = event.target.value;
         if(field === 'name') {
@@ -15,8 +16,7 @@ export default class InputsContainer extends LightningElement {
     }
    
 
-    handleClick(event) {
-        this.clickedButtonLabel = event.target.label;
+    handleClick() {
 
         const detail = {
             name: this.name,

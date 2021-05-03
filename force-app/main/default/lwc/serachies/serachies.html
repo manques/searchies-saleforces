@@ -2,15 +2,11 @@
     <div>
         <c-inputs-container onsearch={handleEvent}></c-inputs-container>
     </div>
-    <template if:true={isSearchData}>
-        <div>
-            <c-card-list></c-card-list>
-        </div>
-    </template>
-    <template if:false={isSearchData}>
-        <p class="no-data-found">no data found!</p>
-    </template>
+    <div>
+        <c-card-list></c-card-list>
+    </div>
 </template>
+
 
 
 

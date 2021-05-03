@@ -1,6 +1,5 @@
 public with sharing class TestController {
     public TestController() {
-
     }
 
     @AuraEnabled(cacheable=true)
@@ -14,7 +13,7 @@ public with sharing class TestController {
         system.debug('vin');
         system.debug(vin);
         // System.out.println(key);
-        return[ select id, name, type, industry from Account WHERE name LIKE: '%'+keyName+'%' and type LIKE: '%'+vin+'%' limit 10];
+        return[ SELECT id, name, type, industry from Account WHERE name LIKE: '%'+keyName+'%' and type LIKE: '%'+vin+'%' LIMIT 10];
     }
 }
    

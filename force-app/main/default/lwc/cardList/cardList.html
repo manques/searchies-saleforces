@@ -1,18 +1,15 @@
 <template>
     <div class="c-container">
+        <p>{name} : {vin}</p>
+        <!-- <c-table></c-table> -->
+        
         <lightning-layout multiple-rows="true">
-            <lightning-layout-item padding="around-small" size="6" color="primary">
-                <c-table1></c-table1>
-            </lightning-layout-item>
-            <lightning-layout-item padding="around-small" size="6" color="primary">
-                <c-table2></c-table2>
-            </lightning-layout-item>
-            <lightning-layout-item padding="around-small" size="6" color="primary">
-                <c-table3></c-table3>
-            </lightning-layout-item>
-            <lightning-layout-item padding="around-small" size="6" color="primary">
-                <c-table4></c-table4>
-            </lightning-layout-item>
+            <template for:each={listTables} for:item="list">
+                <lightning-layout-item key={list.id} padding="around-small" size="6" color="primary">
+                    <c-table  list={list}></c-table>
+                </lightning-layout-item>
+            </template>
+           
         </lightning-layout>
     </div>
 </template>
