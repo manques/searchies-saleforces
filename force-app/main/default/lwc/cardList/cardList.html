@@ -1,11 +1,12 @@
 <template>
     <div class="c-container">
-        <p>{name} : {vin}</p>
-        <!-- <c-table></c-table> -->
-        
         <lightning-layout multiple-rows="true">
             <template for:each={listTables} for:item="list">
-                <lightning-layout-item key={list.id} padding="around-small" size="6" color="primary">
+                <lightning-layout-item key={list.id}
+                                       if:true={list.data} 
+                                       padding="around-small" 
+                                       size="6" 
+                                       color="primary">
                     <c-table  list={list}></c-table>
                 </lightning-layout-item>
             </template>
