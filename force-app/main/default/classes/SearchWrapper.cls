@@ -47,6 +47,12 @@ public with sharing class SearchWrapper {
         system.debug(id);
         return [SELECT Id, Name, Description__c, Service_Contract__r.Name FROM Coverage__c WHERE Service_Contract__r.Id = :id];
     }
+
+    @AuraEnabled(cacheable=true)
+    public static List<Repair__c> getRepir(string id) {
+        system.debug(id);
+        return [SELECT Name, Service_Contract__r.Name, Customer__r.Name, Coverage__r.Name, Description__c, Status__c FROM Repair__c WHERE Coverage__r.Id = :id];
+    }
     // 
 
     public class myWrapper {

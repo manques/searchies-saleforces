@@ -1,12 +1,22 @@
 <template>
-    <template if:true={list}>
-        <div style="height: 300px;">
-            <lightning-datatable
-                    key-field="id"
-                    data={list.data}
-                    columns={list.columns}
-                    >
-            </lightning-datatable>
-        </div>
-    </template>
+    <lightning-layout multiple-rows="true">
+        <!-- Account -->
+        <lightning-layout-item if:true={list.data} 
+                        size="6">
+            <div style="height: 300px;">
+                <lightning-datatable
+                        key-field="id"
+                        data={list.data}
+                        columns={list.columns}
+                        onrowselection={getSelectedName}>
+                </lightning-datatable>
+            </div>
+        </lightning-layout-item>
+         <!-- repair -->
+         <lightning-layout-item if:true={repair}
+                size="6">
+            <c-repair-table  list={repair}></c-repair-table>
+        </lightning-layout-item>
+    </lightning-layout>
+   
 </template>
