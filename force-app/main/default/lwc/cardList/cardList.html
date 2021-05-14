@@ -1,16 +1,84 @@
 <template>
     <div class="c-container">
+        <!-- JH7458965874 -->
         <lightning-layout multiple-rows="true">
-            <template for:each={listTables} for:item="list">
-                <lightning-layout-item key={list.id}
-                                       if:true={list.data} 
-                                       padding="around-small" 
-                                       size="6" 
-                                       color="primary">
-                    <c-table  list={list}></c-table>
+                <!-- Account -->
+                <lightning-layout-item if:true={account} 
+                                size="6">
+                    <lightning-card>
+                        <h1>
+                            <strong>Name: </strong>
+                            <span>{account.Name}</span>
+                        </h1>
+                        <h1>
+                            <strong>Email: </strong>
+                            <span>{account.Email__c}</span>
+                        </h1>
+                        <h1>
+                            <strong>Phone: </strong>
+                            <span>{account.Phone}</span>
+                        </h1>
+                        <h1>
+                            <strong>VIN: </strong>
+                            <span>{account.VIN__c}</span>
+                        </h1>
+                        <h1>
+                            <strong>Model: </strong>
+                            <span>{account.Model__c}</span>
+                        </h1>
+                        <h1>
+                            <strong>Make: </strong>
+                            <span>{account.Make__c}</span>
+                        </h1>
+                        <h1>
+                            <strong>Year: </strong>
+                            <span>{account.Year__c}</span>
+                        </h1>
+                    </lightning-card>
                 </lightning-layout-item>
-            </template>
-           
+                <!-- service contract -->
+                <lightning-layout-item if:true={contract} 
+                                size="6">
+                    <lightning-card>
+                        <h1>
+                            <strong>Name: </strong>
+                            <span>{contract.Name}</span>
+                        </h1>
+                        <h1>
+                            <strong>Customer: </strong>
+                            <span>{contract.Customer__r.Name}</span>
+                        </h1>
+                        <h1>
+                            <strong>Dealer Address: </strong>
+                            <span>{contract.Dealer_Address__c}</span>
+                        </h1>
+                        <h1>
+                            <strong>Current Ododmeter: </strong>
+                            <span>{contract.Current_Ododmeter__c}</span>
+                        </h1>
+                        <h1>
+                            <strong>VIN: </strong>
+                            <span>{contract.Customer__r.VIN__c}</span>
+                        </h1>
+                        <h1>
+                            <strong>Model: </strong>
+                            <span>{contract.Customer__r.Model__c}</span>
+                        </h1>
+                        <h1>
+                            <strong>Make: </strong>
+                            <span>{contract.Customer__r.Make__c}</span>
+                        </h1>
+                        <h1>
+                            <strong>Year: </strong>
+                            <span>{contract.Customer__r.Year__c}</span>
+                        </h1>
+                    </lightning-card>
+                </lightning-layout-item>
+                <!-- coverage -->
+                <lightning-layout-item if:true={coverage.data}
+                                       size="6">
+                    <c-table  list={coverage}></c-table>
+                </lightning-layout-item>
         </lightning-layout>
     </div>
 </template>

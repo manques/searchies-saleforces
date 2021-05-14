@@ -1,75 +1,66 @@
 import { LightningElement, api, track } from 'lwc';
 
-import getAccounts1 from '@salesforce/apex/TestController.getAccounts1';
-import getAccounts2 from '@salesforce/apex/TestController.getAccounts2';
-import getAccounts3 from '@salesforce/apex/TestController.getAccounts3';
-import getAccounts4 from '@salesforce/apex/TestController.getAccounts4';
 
-const columns1 = [
-    { label: 'Account Name', fieldName: 'Name', type: 'Name' },
-    { label: 'Type', fieldName: 'Type', type: 'Picklist' },
-    { label: 'Industry', fieldName: 'Industry', type: 'Picklist' },
-];
-const columns2 = [
-    { label: 'Account Name', fieldName: 'Name', type: 'Name' },
-    { label: 'Type', fieldName: 'Type', type: 'Picklist' },
-    { label: 'Industry', fieldName: 'Industry', type: 'Picklist' },
-];
-const columns3 = [
-    { label: 'Account Name', fieldName: 'Name', type: 'Name' },
-    { label: 'Type', fieldName: 'Type', type: 'Picklist' },
-    { label: 'Industry', fieldName: 'Industry', type: 'Picklist' },
-];
+import getDetails from '@salesforce/apex/SearchWrapper.getDetails';
 
-const columns4 = [
-    { label: 'Account Name', fieldName: 'Name', type: 'Name' },
-    { label: 'Type', fieldName: 'Type', type: 'Picklist' },
-    { label: 'Industry', fieldName: 'Industry', type: 'Picklist' },
-];
 
+
+const coverageColumns = [
+    { label: 'Name', fieldName: 'Name', type: 'Text' },
+    { label: 'Description', fieldName: 'Description__c', type: 'Long Text Area' },
+    { label: 'Service Contract', fieldName: 'Service_Contract__c', type: 'Picklist' },
+];
 export default class CardList extends LightningElement {
-    @track listTables = [
-        {
-            id:'1',
-            data: null,
-            columns: columns1
-        },
-        {
-            id:'2',
-            data: null,
-            columns: columns2
-        },
-        {
-            id:'3',
-            data: null,
-            columns: columns3
-        },
-        {
-            id:'4',
-            data: null,
-            columns: columns4
-        }
-    ];
+    @track account;
+    @track contract;
+    @track coverage =  {
+        data: null,
+        columns: coverageColumns
+    };
 
 
-    @api play(keyName, vin){
-        if(keyName && vin) {
+    @api play(name, vin){
+        if(name && vin) {
             console.log(JSON.stringify(this.listTables));
-            this.apiHandler(keyName, vin, getAccounts1, 0);
-            this.apiHandler(keyName, vin, getAccounts2, 1);
-            this.apiHandler(keyName, vin, getAccounts3, 2);
-            this.apiHandler(keyName, vin, getAccounts4, 3);
+            this.apiHandler(name, vin, getDetails, 0);
+            // this.apiHandler(name, vin, getAccounts2, 1);
+            // this.apiHandler(name, vin, getAccounts3, 2);
+            // this.apiHandler(name, vin, getAccounts4, 3);
         }    
     }
 
 
 
-    apiHandler(keyName, vin, getMethod, index) {
-        getMethod({keyName, vin})
+    apiHandler(name, vin, getMethod, index) {
+        getMethod({name, vin})
         .then((result) => {
+            console.log('-------------   result   ------------------');
+            console.log(result);
+            this.account = JSON.parse(JSON.stringify(result[0].account)) ;
+            this.contract = JSON.parse(JSON.stringify(result[0].contract));
+            
+            const formatCoverage = result[0].coverage.map(element => {
+                const newElement = {
+                    Id: element.Id,
+                    Name: element.Name,
+                    Description__c: element.Description__c,
+                    Service_Contract__c: element.Service_Contract__r.Name
+                };
+                return newElement;
+            });
+
+            this.coverage.data = JSON.parse(JSON.stringify(formatCoverage));
+            console.log(JSON.stringify(this.account));
+            console.log('name:');
+            console.log(this.account.Name);
+            console.log(JSON.stringify(this.contract));
+            console.log(JSON.stringify(this.coverage));
+
             this.responseHandler(result, index);
         })
         .catch((error) => {
+            console.log('-------------   error   ------------------');
+            console.log(JSON.stringify(error));
             this.errorHandler(error);
         });
     }

@@ -22,7 +22,7 @@ export default class InputsContainer extends LightningElement {
             name: this.name,
             vin: this.vin
         };
-
+        console.log(detail);
         const inputEvent = new CustomEvent('search', { detail: detail });
         this.dispatchEvent(inputEvent);
     }
