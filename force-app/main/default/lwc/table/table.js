@@ -5,13 +5,19 @@ export default class Table extends LightningElement {
     @api list;
     @track selectedCoverage;
     @track repair;
+    @track length;
+    @track isRepair;
+
     getSelectedName(event) {
         const selectedRows = event.detail.selectedRows;
-        const length = event.detail.selectedRows.length;
-        console.log(length)
-        if(length > 0){
-            this.selectedCoverage = selectedRows[length - 1].Id;
-            console.log(selectedRows[length - 1].Name);
+        console.log(JSON.stringify(selectedRows));
+        this.length = event.detail.selectedRows.length;
+        console.log(this.length);
+        this.isRepair = this.isRepairValue();
+        console.log(this.isRepair);
+        if(this.length > 0){
+            this.selectedCoverage = selectedRows[this.length - 1].Id;
+            console.log(selectedRows[this.length - 1].Name);
             console.log(this.selectedCoverage);
             this.handleApi(this.selectedCoverage);
         }
@@ -42,5 +48,8 @@ export default class Table extends LightningElement {
             console.log(error);
             console.log(JSON.stringify(error));
         });
+    }
+    isRepairValue(){
+        return this.length > 0;
     }
 }
